@@ -47,6 +47,7 @@
 html, body, .site-wrapper {
   height: 100%; }
 
+
 body {
   background-color: #ffffff;
   font-size: 14px;
@@ -76,6 +77,15 @@ h1 {
   @media only screen and (max-width: 575px) {
     h1 {
       font-size: 30px; } }
+
+.rating .fa {
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.rating .fa.star-filled {
+    color: gold;
+}
 
 h2 {
   font-size: 30px; }
@@ -3911,8 +3921,9 @@ a.popup-img {
 .comment-notes {
   margin: 0; }
 
-.rating i.fa:not(:last-child) {
-  color: #F9BA48; }
+.rating i.fa {
+    color: #F9BA48;
+}
 
 .comment-form-comment {
   margin-bottom: 10px; }

@@ -11,7 +11,7 @@
                         <div class="page-banner text-center">
                             <h1>Liên Hệ</h1>
                             <ul class="page-breadcrumb">
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="TrangChu.aspx">Trang chủ</a></li>
                                 <li>Liên Hệ</li>
                             </ul>
                         </div>

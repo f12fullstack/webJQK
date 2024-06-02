@@ -11,7 +11,7 @@
                         <div class="page-banner text-center">
                             <h1>Tài Khoản Của Tôi</h1>
                             <ul class="page-breadcrumb">
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="TrangChu.aspx">Trang chủ</a></li>
                                 <li>Tài Khoản Của Tôi</li>
                             </ul>
                         </div>
@@ -107,6 +107,7 @@
                                        
                                 <asp:Label ID="lbDetailTitle" runat="server" Text="" Font-Size="20px" Font-Bold="true" ForeColor="#29b279"></asp:Label>
                                 <br />
+
                                 <asp:GridView ID="grvDetails" CssClass="table" runat="server" 
                                     AutoGenerateColumns="false" 
                                     ShowHeaderWhenEmpty="true">
@@ -126,7 +127,7 @@
 
                                     </Columns>
                                 </asp:GridView>
-                                <asp:Panel ID="Panel2" runat="server">
+                              <!--  <asp:Panel ID="Panel2" runat="server">
                                     THÔNG KÊ MUA SẮM
                                     <br />
                                     <br />
@@ -148,7 +149,7 @@
                                     <br />
                                     <br />
                                 </asp:Panel>
-
+                                -->
                                                 </table>
                                             </div>
                                         </div>

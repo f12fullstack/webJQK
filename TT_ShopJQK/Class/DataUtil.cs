@@ -13,7 +13,7 @@ namespace TT_ShopJQK.Class
 {
     public class DataUtil
     {
-        SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;");
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString);
         public List<detailProduct> dssp()
         {
             List<detailProduct> dt = new List<detailProduct>();
@@ -115,7 +115,7 @@ namespace TT_ShopJQK.Class
         {
             List<detailProduct> a = new List<detailProduct>();
             string b = "";
-            string sql = "SELECT p.ProductId, p.CategoryId, p.LastPrice, p.Price, p.Description, p.Name, pd.Id, pd.Url ,pc.Name AS NameCategory  FROM Products p JOIN ProductImages pd ON p.ProductId = pd.ProductId JOIN Categories pc ON p.CategoryId = pc.CategoryId WHERE p.ProductId = @ProductId;";
+            string sql = "SELECT p.ProductId,p.quantity, p.CategoryId, p.LastPrice, p.Price, p.Description, p.Name, pd.Id, pd.Url ,pc.Name AS NameCategory  FROM Products p JOIN ProductImages pd ON p.ProductId = pd.ProductId JOIN Categories pc ON p.CategoryId = pc.CategoryId WHERE p.ProductId = @ProductId;";
             con.Open();
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.Parameters.AddWithValue("@ProductId", ProductId);
@@ -133,6 +133,7 @@ namespace TT_ShopJQK.Class
                     bok.Price = (decimal)dr["Price"];
                     bok.Description = (string)dr["Description"];
                     bok.CategoryId = (int)dr["CategoryId"];
+                    bok.quantity = (int)dr["quantity"];
                     b = (string)dr["Url"];
                     int c = (int)dr["Id"];
                     if (bok.Url == null)

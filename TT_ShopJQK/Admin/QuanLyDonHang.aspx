@@ -73,16 +73,16 @@
                             ShowHeaderWhenEmpty="true">
                             <Columns>
                                 <asp:BoundField DataField="OrderID" HeaderText="ID" Visible="false" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
-                                <asp:BoundField DataField="OrderID" HeaderText="mã sp" Visible="false" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
-                                <asp:BoundField DataField="OrderID" HeaderText="tên sp" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
+                                <asp:BoundField DataField="ProductId" HeaderText="mã sp" Visible="false" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
+                                <asp:BoundField DataField="Name" HeaderText="Tên sản phẩm" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
                                 <asp:TemplateField HeaderText="Ảnh" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb"
                                     HeaderStyle-BorderWidth="1px" HeaderStyle-Width="200px" ControlStyle-CssClass="imag">
                                     <ItemTemplate>
-                                        <asp:Image ID="img1" ImageUrl='<%# Eval("OrderID") %>' runat="server" Width="150px" Height="115px" />
+                                        <asp:Image ID="img1" ImageUrl='<%# Eval("Url") %>' runat="server" Width="150px" Height="115px" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="soLuong" HeaderText="Số lượng" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
-                                <asp:BoundField DataField="donGia" HeaderText="Đơn giá" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
+                                <asp:BoundField DataField="Quantity" HeaderText="Số lượng" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
+                                <asp:BoundField DataField="Price" HeaderText="Đơn giá" HeaderStyle-BackColor="#cfc6c6" HeaderStyle-BorderColor="#ebebeb" HeaderStyle-BorderWidth="1px" />
 
                             </Columns>
 

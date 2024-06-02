@@ -67,14 +67,18 @@ namespace TT_ShopJQK.Admin
         {
             //grdShoes.DataSource = data.lsProduct();
             //grdShoes.DataBind();
-            string sqlCon = @"Data Source=DESKTOP-1G3UVUT\SQLEXPRESS;Initial Catalog=JQKShop;Integrated Security=True";
-
-            SqlConnection con = new SqlConnection(sqlCon);
-            string query = "select IDHD, ChiTietHoaDon.maSP, ChiTietHoaDon.donGia, soLuong, tenSP, hinhAnh " +
-                "from ChiTietHoaDon inner join ChiTietSanPham on ChiTietSanPham.maSP = ChiTietHoaDon.maSP" +
-                " where ChiTietHoaDon.IDHD=@IDHD";
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;");
+            string query = "SELECT o.OrderID, oi.ProductID, oi.Quantity, oi.Price, p.ProductId, p.Name, m.Url " +
+                         "FROM Orders o " +
+                         "JOIN OrderItems oi ON o.OrderID = oi.OrderID " +
+                         "JOIN Products p ON oi.ProductID = p.ProductId " +
+                         "JOIN(" +
+                         "   SELECT ProductId, Url, ROW_NUMBER() OVER(PARTITION BY ProductId ORDER BY(SELECT NULL)) AS RowNum " +
+                         "   FROM ProductImages " +
+                         "     ) m ON p.ProductId = m.ProductId AND m.RowNum = 1 " +
+                         "WHERE o.OrderID = @OrderID; ";
             SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("IDHD", IDHD);
+            cmd.Parameters.AddWithValue("OrderID", IDHD);
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

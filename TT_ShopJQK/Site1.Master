@@ -103,9 +103,9 @@
                         <div class="col-lg-6 col-md-6 col-12 order-lg-2 order-md-2 order-3 d-flex justify-content-center">
                             <nav class="main-menu">
                                 <ul>
-                                    <li><a href="TrangChu.aspx">Home</a>
+                                    <li><a href="TrangChu.aspx">Trang chủ</a>
                                     </li>
-                                    <li><a href="#">Shop</a>
+                                    <li><a href="#">Cửa hàng</a>
                                         <ul class="mega-menu four-column">
 <%--<asp:Repeater ID="RpDanhMuc" runat="server" OnItemDataBound="rptMenu_OnItemBound">
     <ItemTemplate>
@@ -144,7 +144,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="Blog.aspx">Blog</a></li>
+                                    <li><a href="Blog.aspx">Bài viết</a></li>
                                     <li><a href="GioiThieu.aspx">Giới Thiệu</a></li>
                                     <li><a href="LienHe.aspx">Liên Hệ</a></li>
                                 </ul>

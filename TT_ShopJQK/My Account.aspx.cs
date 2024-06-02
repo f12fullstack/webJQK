@@ -15,13 +15,14 @@ using iTextSharp.text.pdf;
 using Org.BouncyCastle.Asn1.X509;
 using System.Collections.Concurrent;
 using System.Security.Policy;
+using System.Configuration;
 
 namespace TT_ShopJQK
 {
     public partial class My_Account : System.Web.UI.Page
     {
         DataUtil data = new DataUtil();
-        SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;");
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -49,7 +50,6 @@ namespace TT_ShopJQK
                     lbName.Text = "";
                 }
                 showList();
-
             }
         }
         private void showList()
@@ -58,10 +58,24 @@ namespace TT_ShopJQK
             {
                 int IDDN = Convert.ToInt32(Session["userlogin"].ToString());
                 con.Open();
-                string query = "SELECT o.OrderID, o.ShippingCost ,o.CreatedAt, o.Status,  u.UserName, u.FullName, u.PhoneNum,u.AddressInfo " +
-                    "FROM Orders o " +
-                    "JOIN Users u ON o.UserId = u.UserId " +
-                    "WHERE o.UserId = @UserId;";
+                string query = @"
+                        SELECT o.OrderID, 
+                               o.ShippingCost, 
+                               o.CreatedAt, 
+                               CASE 
+                                   WHEN o.Status = 0 THEN 'Chưa duyet'
+                                   WHEN o.Status = 1 THEN 'Đã duyet'
+                                   WHEN o.Status = 2 THEN 'Đã nhan'
+                                    WHEN o.Status = 3 THEN 'Đã thanh toán'
+                                   ELSE 'Unknown'
+                               END AS Status, 
+                               u.UserName, 
+                               u.FullName, 
+                               u.PhoneNum, 
+                               u.AddressInfo 
+                        FROM Orders o 
+                        JOIN Users u ON o.UserId = u.UserId 
+                        WHERE o.UserId = @UserId";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("UserId", IDDN);
                 
@@ -249,8 +263,6 @@ namespace TT_ShopJQK
             msg.Text = "";
             if (checkValue())
             {
-                string sqlCon = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
-                SqlConnection con = new SqlConnection(sqlCon);
                 con.Open();
                 string checkuser = "select * from Users";
                 SqlCommand cmd = new SqlCommand(checkuser, con);
@@ -283,8 +295,6 @@ namespace TT_ShopJQK
         }
         public void SuaUser(int IDDN)/*(Users b)*/
         {
-            string sqlCon = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
-            SqlConnection con = new SqlConnection(sqlCon);
             con.Open();
             string sql1 = "update Users set FullName = @FullName, UserEmail=@UserEmail,AddressInfo=@AddressInfo,PhoneNum=@PhoneNum where UserId=@UserId";
             SqlCommand cmd = new SqlCommand(sql1, con);

@@ -3,7 +3,8 @@ using System.Net.Mail;
 using System.Net;
 using System.Web.UI;
 using System.Data.SqlClient;
-
+using System.Configuration;
+using System.Drawing;
 
 namespace TT_ShopJQK
 {
@@ -16,7 +17,7 @@ namespace TT_ShopJQK
         }
         protected bool CheckUser(string username, string email)
         {
-            string connectionString = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
+            string connectionString = ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString; ;
             string query = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND UserEmail = @UserEmail";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -64,7 +65,8 @@ namespace TT_ShopJQK
 
         protected int upOTP(string username, string email)
         {
-            string connectionString = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
+            string connectionString = ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString;
+            ;
             string query = "UPDATE Users SET Otp = @Otp, TimeOtp = @TimeOtp WHERE Username = @Username AND UserEmail = @UserEmail";
             Random random = new Random();
             int randomNumber = random.Next(100000, 999999);
@@ -102,7 +104,7 @@ namespace TT_ShopJQK
             {
 
                 int otp = upOTP(txtusername.Text, txtEmail.Text);
-                SendEmail("chinh2k2zzz@gmail.com", otp);
+                SendEmail(txtEmail.Text, otp);
                 form1.Visible = false;
                 form2.Visible = true;
             }
@@ -115,7 +117,7 @@ namespace TT_ShopJQK
 
         protected bool CheckOtp(string otp)
         {
-            string connectionString = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
+            string connectionString = ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString;
             string query = "SELECT COUNT(*) FROM Users WHERE Otp = @Otp AND TimeOtp < GETDATE()";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -137,7 +139,7 @@ namespace TT_ShopJQK
 
         protected void upPass(string username, string email , string pass)
         {
-            string connectionString = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
+            string connectionString = ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString;
             string query = "UPDATE Users SET UserPassword = @UserPassword  WHERE Otp = @Otp AND TimeOtp < GETDATE();";
 
             try

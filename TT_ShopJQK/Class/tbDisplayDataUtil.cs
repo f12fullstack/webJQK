@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using TT_ShopJQK.Class;
+using System.Configuration;
 
 namespace TT_ShopJQK
 {
@@ -14,7 +15,7 @@ namespace TT_ShopJQK
         SqlConnection con;
         public tbDisplayDataUtil()
         {
-            string sqlCon = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
+            string sqlCon = ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString;
             con = new SqlConnection(sqlCon);
         }
         public List<HoaDon> lsOrder(int IDDN)
@@ -61,6 +62,16 @@ namespace TT_ShopJQK
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        public int getNewOrder ()
+        {
+            con.Open();
+            SqlCommand maxIdCmd = new SqlCommand("SELECT ISNULL(MAX(OrderId), 0) FROM Orders", con);
+            int maxOrderId = (int)maxIdCmd.ExecuteScalar();
+            con.Close();
+            return maxOrderId;
+        }
+
         public int addOrder(HoaDon o)
         {
             con.Open();

@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using TT_ShopJQK.Class;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace TT_ShopJQK
 {
@@ -24,7 +25,7 @@ namespace TT_ShopJQK
       
         public void checkUser()
         {
-            string sqlCon = @"Data Source=LAPTOP-P8OOSEKE\SQLEXPRESS;Initial Catalog=db_ECommerceShop;User Id=sa;Password=12345;";
+            string sqlCon = ConfigurationManager.ConnectionStrings["db_ECommerceShopConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(sqlCon);
             con.Open();
             string checkuser = "select * from Users where UserName like '" + txtusername.Text.ToString() + "' ";

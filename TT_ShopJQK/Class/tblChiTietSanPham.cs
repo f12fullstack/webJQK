@@ -9,6 +9,7 @@ namespace TT_ShopJQK.Class
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
+        public int quantity { get; set; }
         public string NameCategoryId { get; set; }
         public decimal Price { get; set; }
         public decimal LastPrice { get; set; }
